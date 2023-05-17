@@ -53,6 +53,8 @@ function addExpense(e) {
     //         </div>
     //     </div>
     const harcamaDiv = document.createElement('div');
+
+    liste.appendChild(harcamaDiv)//2.yontem
     // class ekleme
     harcamaDiv.classList.add('harcama');
     // eğer odendi checkbox in içindeki check değeri true ise
@@ -70,7 +72,7 @@ function addExpense(e) {
         ;
 
     // oluşturulan harcamayı hmtl de listeye ekleme
-    liste.appendChild(harcamaDiv);
+     liste.appendChild(harcamaDiv);
 
     // toplamı güncelleme fonskiyonun çağırılması
     updateToplam(fiyatIpnut.value);
@@ -113,27 +115,33 @@ function handleFilter(e) {
     //! console.log(e.target.value);
     // listenin içindeki çocuklara erişilmesi
     //! console.log(liste.childNodes);
-    const items = liste.childNodes;
-    console.dir(items);
-    console.log(items);
+     const items = Array.from(liste.children); 
+    console.log(liste);
+    //childNodes -> HTml öğesinin doğrudan tüm çocuklarını almak için
+    // const items = liste.childNodes; //ıtems listeyi for döngüsü kullanmak için
+   
     // tüm elemanlarda gezinmek
     items.forEach((item) => {
+      console.log(item);
+      console.log(e.target.value);
         switch (e.target.value) {
           case 'all':
             item.style.display = 'flex';
             break;
     
           case 'paid':
-            if (!item.classList.contains("paid")) {
+            console.log('odeneneler');
+            if (!item.classList.contains("odendi")) {
               item.style.display = 'none';
             } else {
               item.style.display = 'flex';
             }
-    
+            
             break;
-    
-          case 'not-paid':
-            if (item.classList.contains("paid")) {
+            
+            case 'not-paid':
+              console.log('odenmeyeneler');
+              if (item.classList.contains("odendi")) {
               item.style.display = 'none';
             } else {
               item.style.display = 'flex';
